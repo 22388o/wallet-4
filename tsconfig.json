@@ -1,0 +1,52 @@
+{
+  "compilerOptions": {
+    // https://www.typescriptlang.org/tsconfig#allowSyntheticDefaultImports
+    // Allows import React from "react" instead of import * as React from "react"
+    "allowSyntheticDefaultImports": true,
+
+    // https://www.typescriptlang.org/tsconfig#esModuleInterop
+    // Fixes issues with CommonJS/AMD/UMD import formats
+    "esModuleInterop": true,
+
+    // https://www.typescriptlang.org/tsconfig#experimentalDecorators
+    // Enables experimental support for [decorators](https://github.com/tc39/proposal-decorators), 
+    // which is in stage 3 of the TC39 standardization process.
+    "experimentalDecorators": true,
+
+    // https://www.typescriptlang.org/tsconfig#forceConsistentCasingInFileNames
+    // TypeScript will issue an error if a program tries to include a file by a casing different from the casing on disk.
+    "forceConsistentCasingInFileNames": true,
+
+    // https://www.typescriptlang.org/tsconfig#incremental
+    // Tells TypeScript to save information about the project graph from the last compilation to files stored on disk.
+    // This creates a series of .tsbuildinfo files in the same folder as your compilation output. 
+    "incremental": true,
+
+    // https://www.typescriptlang.org/tsconfig#jsx
+    // Controls how JSX constructs are emitted in JavaScript files. 
+    // This only affects output of JS files that started in .tsx files.
+    "jsx": "react-jsx",
+
+    // https://www.typescriptlang.org/tsconfig#moduleResolution
+    // Specifies the module resolution strategy:
+    "moduleResolution": "node",
+
+    // https://www.typescriptlang.org/tsconfig#outDir
+    // Files will be emitted into this directory. 
+    "outDir": "dist",
+
+    // https://www.typescriptlang.org/tsconfig#rootDir
+    "rootDir": "./src",
+
+    // https://www.typescriptlang.org/tsconfig#target
+    // Specifies browser support of compiled files
+    "target": "ES6",
+
+    // https://www.typescriptlang.org/tsconfig#strict
+    // Enables a wide range of type checking behavior that results in stronger guarantees of program correctness. 
+    "strict": true
+
+  },
+  "include": ["./src/**/*.ts*"],
+  "exclude": ["**/*.", "**/dist", "**/build", "**/node_modules"]
+}
