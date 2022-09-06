@@ -9,7 +9,7 @@
     "esModuleInterop": true,
 
     // https://www.typescriptlang.org/tsconfig#experimentalDecorators
-    // Enables experimental support for [decorators](https://github.com/tc39/proposal-decorators), 
+    // Enables experimental support for [decorators](https://github.com/tc39/proposal-decorators),
     // which is in stage 3 of the TC39 standardization process.
     "experimentalDecorators": true,
 
@@ -19,11 +19,11 @@
 
     // https://www.typescriptlang.org/tsconfig#incremental
     // Tells TypeScript to save information about the project graph from the last compilation to files stored on disk.
-    // This creates a series of .tsbuildinfo files in the same folder as your compilation output. 
+    // This creates a series of .tsbuildinfo files in the same folder as your compilation output.
     "incremental": true,
 
     // https://www.typescriptlang.org/tsconfig#jsx
-    // Controls how JSX constructs are emitted in JavaScript files. 
+    // Controls how JSX constructs are emitted in JavaScript files.
     // This only affects output of JS files that started in .tsx files.
     "jsx": "react-jsx",
 
@@ -32,7 +32,7 @@
     "moduleResolution": "node",
 
     // https://www.typescriptlang.org/tsconfig#outDir
-    // Files will be emitted into this directory. 
+    // Files will be emitted into this directory.
     "outDir": "dist",
 
     // https://www.typescriptlang.org/tsconfig#rootDir
@@ -43,9 +43,8 @@
     "target": "ES6",
 
     // https://www.typescriptlang.org/tsconfig#strict
-    // Enables a wide range of type checking behavior that results in stronger guarantees of program correctness. 
+    // Enables a wide range of type checking behavior that results in stronger guarantees of program correctness.
     "strict": true
-
   },
   "include": ["./src/**/*.ts*"],
   "exclude": ["**/*.", "**/dist", "**/build", "**/node_modules"]
