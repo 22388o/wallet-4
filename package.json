@@ -1,0 +1,10 @@
+{
+  "name": "wallet",
+  "packageManager": "yarn@3.2.3",
+  "scripts": {
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "2.7.1"
+  }
+}
