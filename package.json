@@ -2,6 +2,7 @@
   "name": "wallet",
   "packageManager": "yarn@3.2.3",
   "scripts": {
+    "serve": "node ./scripts/watch.js",
     "lint": "eslint --ignore-path .eslintignore --ext .ts,.tsx .",
     "lint:fix": "eslint --ignore-path .eslintignore --ext .ts,.tsx --fix .",
     "format": "prettier --write ."
@@ -12,6 +13,7 @@
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
+    "esbuild": "^0.15.7",
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "latest",

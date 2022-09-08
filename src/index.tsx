@@ -9,7 +9,7 @@ function render() {
   }
 
   const root = createRoot(container);
-  root.render(<div>Hello World</div>);
+  root.render(<div>Helslo World</div>);
 }
 
 render();
