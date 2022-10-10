@@ -2,6 +2,8 @@ const esbuild = require("esbuild");
 const fs = require("fs");
 const path = require("path");
 const { createServer, request } = require("http");
+const plugin = require("node-stdlib-browser/helpers/esbuild/plugin");
+const stdLibBrowser = require("node-stdlib-browser");
 
 const HTTP_SERVER_PORT = 5001 || process.env.PORT;
 const ESBUILD_SERVE_PORT = 5002;
@@ -24,42 +26,68 @@ esbuild
         console.log(error ? error : "...");
       },
     },
+    inject: [require.resolve("node-stdlib-browser/helpers/esbuild/shim")],
+    define: {
+      global: "global",
+      process: "process",
+      Buffer: "Buffer",
+    },
+    plugins: [plugin(stdLibBrowser)],
   })
   .then(() => {
-    fs.cp(path.resolve("public"), path.resolve("dist"), { recursive: true }, err => {
-      if (err) {
-        console.error(err);
-        process.exit(1);
-      }
-    });
+    fs.cp(
+      path.resolve("public"),
+      path.resolve("dist"),
+      { recursive: true },
+      err => {
+        if (err) {
+          console.error(err);
+          process.exit(1);
+        }
+      },
+    );
   })
   .catch(err => {
     console.log(err);
     process.exit(1);
   });
 
-esbuild.serve({ servedir: "./dist", host: "localhost", port: ESBUILD_SERVE_PORT }, {}).then(() => {
-  createServer((req, res) => {
-    const { url, method, headers } = req;
+esbuild
+  .serve(
+    { servedir: "./dist", host: "localhost", port: ESBUILD_SERVE_PORT },
+    {},
+  )
+  .then(() => {
+    createServer((req, res) => {
+      const { url, method, headers } = req;
 
-    if (req.url === "/esbuild") {
-      return clients.push(
-        res.writeHead(200, {
-          "Content-Type": "text/event-stream",
-          "Cache-Control": "no-cache",
-          Connection: "keep-alive",
-        }),
+      if (req.url === "/esbuild") {
+        return clients.push(
+          res.writeHead(200, {
+            "Content-Type": "text/event-stream",
+            "Cache-Control": "no-cache",
+            Connection: "keep-alive",
+          }),
+        );
+      }
+
+      const path = ~url.split("/").pop().indexOf(".") ? url : `/index.html`; //for PWA with router
+
+      req.pipe(
+        request(
+          {
+            hostname: "0.0.0.0",
+            port: ESBUILD_SERVE_PORT,
+            path,
+            method,
+            headers,
+          },
+          prxRes => {
+            res.writeHead(prxRes.statusCode, prxRes.headers);
+            prxRes.pipe(res, { end: true });
+          },
+        ),
+        { end: true },
       );
-    }
-
-    const path = ~url.split("/").pop().indexOf(".") ? url : `/index.html`; //for PWA with router
-
-    req.pipe(
-      request({ hostname: "0.0.0.0", port: ESBUILD_SERVE_PORT, path, method, headers }, prxRes => {
-        res.writeHead(prxRes.statusCode, prxRes.headers);
-        prxRes.pipe(res, { end: true });
-      }),
-      { end: true },
-    );
-  }).listen(HTTP_SERVER_PORT);
-});
+    }).listen(HTTP_SERVER_PORT);
+  });

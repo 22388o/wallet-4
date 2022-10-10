@@ -1,5 +1,7 @@
 import { createRoot } from "react-dom/client";
 
+import App from "./App";
+
 function render() {
   const container = document.getElementById("root");
 
@@ -8,8 +10,9 @@ function render() {
     return;
   }
 
+  container.setAttribute("style", "height:100%;width:100%;");
   const root = createRoot(container);
-  root.render(<div>Helslo World</div>);
+  root.render(<App />);
 }
 
 render();
